@@ -1,2 +1,3 @@
-# projettest
-le premier projet de test en code de lele clacla
+# projet2I013
+projet pour l'UE 20I13 avec les jeux à deux joueurs
+UPMC 2017-2018
