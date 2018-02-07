@@ -52,19 +52,22 @@ def finJeu(jeu):
     return False
 
 def saisieCoup(jeu):
-    
-    numero_joueur=jeu[1]
-   
-    if numero_joueur == 1:
+
+    if jeu[1] == 1:
         joueur = joueur1
     else :
         joueur = joueur2
-        jeu[2] = getCoupsValides(jeu)
-   
-    coupJoue = joueur.saisieCoup(getCopieJeu(jeu))
+    
+    jeu[2] = getCoupsValides(jeu)
+
+    coupJoue = joueur.saisieCoup(jeu)
+    #print(str(coupJoue))
+    #print(str(getCoupsValides(jeu)))
+    
     while coupJoue not in getCoupsValides(jeu) :
+    #while (not game.coupValide(jeu,coupJoue)):
         print "Votre coup n'est pas valide, recommencez la saisie"
-        coupJoue = joueur.saisieCoup(getCopieJeu(jeu))
+        coupJoue = joueur.saisieCoup(jeu)
 
     return coupJoue
     
@@ -174,6 +177,11 @@ def getJoueur(jeu):
     """
     return jeu[1]
 
+def getAdversaire (jeu) :
+    """ jeu  -> nat
+        Retourne l'adversaire du joueur qui joue dans le jeu passe en parametre
+    """
+    return jeu[1]%2+1
 
 def changeJoueur(jeu):
     """ jeu  -> void
@@ -197,6 +205,12 @@ def getCaseVal(jeu, ligne, colonne):
         Hypothese: les numeros de ligne et colonne appartiennent bien au plateau  : ligne<=getNbLignes(jeu) and colonne<=getNbColonnes(jeu)
     """
     return jeu[0][ligne][colonne]
+
+def setCaseVal(jeu, ligne, colonne, valeur) : 
+    """ jeu*nat*nat*nat -> void
+        Modifie le contenu de la case ligne,colonne du jeu en lui affectant le contenu valeur
+    """
+    jeu[0][ligne][colonne] = valeur
     
     
 

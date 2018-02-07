@@ -12,12 +12,10 @@ def joue ():
     """void -> nat
     retourne un gagnant"""
     jeu = game.initialiseJeu ()
-
-     
  
     while not game.finJeu(jeu) : 
         game.affiche(jeu)
-        coup = game.saisieCoup(game.getCopieJeu(jeu))
+        coup = game.saisieCoup(jeu)
         game.joueCoup(jeu, coup)
         game.affiche(jeu)
     return game.getGagnant (jeu)
