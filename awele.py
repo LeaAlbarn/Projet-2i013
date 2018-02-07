@@ -6,7 +6,7 @@ import game
 def initPlateau () :
     """void->plateau
     initialise le plateau : 4 graines dans chaque case"""
-    plateau = [[4,4,4,4,4,4],[4,4,4,4,4,4]]
+    plateau = [[4,4,4,4,4,4],[4,2,4,4,4,4]]
     return plateau
 
 def initScore():
@@ -22,7 +22,7 @@ def finPartie (jeu) :
         for j in range(6) : 
             if jeu[0][i][j]!=0 : 
                 return False
-    if len(jeu[3]) > 100 : 
+    if len(jeu[3]) > 10 : 
         return False
     if jeu[4][0]>24 or jeu[4][1]>24 : 
         return False
@@ -159,20 +159,24 @@ def manger (jeu,coup):
     """
     
     jeu_bis=game.getCopieJeu(jeu)
-    case_val = game.getCaseVal(jeu_bis,coup[0],coup[1])
-    
+    coup_bis = coup
+    case_val = game.getCaseVal(jeu,coup[0],coup[1])
+    print "case a manger  : {}".format(case_val)
 
-    while (case_val== 2 or case_val== 3) and (coup[1]>=0 and coup[1]<6):
-        jeu_bis[4][jeu[1]-1] += case_val
-        game.setCaseVal(jeu_bis, coup[0], coup[1],0)
-        if coup[0]==0 : 
-            coup[1]+=1
-        else : coup[1]-=1
-        case_val = game.getCaseVal(jeu_bis,coup[0],coup[1])
+    while (case_val== 2) : # or case_val== 3) : #and (coup[1]>=0 and coup[1]<6):
+        jeu_bis[4][jeu_bis[1]-1] += case_val #mise a jour du score
+        game.setCaseVal(jeu_bis, coup_bis[0], coup_bis[1],0)
+        if coup_bis[0]==0 : 
+            if coup_bis[1]<5:
+                coup_bis[1]+=1
+        else : 
+            if coup_bis [1]>0:
+                coup_bis[1]-=1
+        case_val = game.getCaseVal(jeu_bis,coup_bis[0],coup_bis[1])
     
-    if estAffame(jeu_bis, game.getAdversaire(jeu_bis)) :
+    """if estAffame(jeu_bis, game.getAdversaire(jeu_bis)) :
         print "on n'a pas pu manger"
-        return jeu 
+        return jeu """
     
     return jeu_bis
 
